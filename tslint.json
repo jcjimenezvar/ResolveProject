@@ -1,0 +1,19 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+      "tslint:recommended",
+      "tslint-config-airbnb",
+      "tslint-config-prettier",
+      "tslint-config-security"
+    ],
+    "linterOptions": {
+      "exclude": ["./docs/**", "./src/api-docs.json"]
+    },
+    "jsRules": {},
+    "rules": {
+      "trailing-comma": [false],
+      "tsr-detect-unsafe-properties-access": false,
+      "tsr-detect-non-literal-fs-filename": false
+    },
+    "rulesDirectory": []
+  }
