@@ -14,7 +14,7 @@ export class ResolveStudioController implements interfaces.Controller {
   ) {}
 
   @httpPost("/resolveStudio")
-  public async uploadImage(
+  public async processInformation(
     @request() req: express.Request,
     @response() res: express.Response,
     @next() nextFunc: express.NextFunction
@@ -38,7 +38,7 @@ export class ResolveStudioController implements interfaces.Controller {
       const httpResponse = { data: {} };
 
       try {
-        httpResponse.data = await this.resolveStudioService.uploadImage(
+        httpResponse.data = await this.resolveStudioService.processInformation(
           dataPayload
         );
       } catch (error) {

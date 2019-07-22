@@ -6,17 +6,19 @@ import expressFileupload from 'express-fileupload';
 import helmet from 'helmet';
 import { InversifyExpressServer } from 'inversify-express-utils';
 import { createLightship } from 'lightship';
+import mongoose from 'mongoose';
 import { container } from './config/ioc/inversify.config';
-
+import './config/ioc/loader';
 import { TYPES } from './config/ioc/types';
 import { ConfigService } from './config/vars/configService';
+
+
 
 import dotenv = require('dotenv')
 if (process.env.NODE_ENV !== 'production') {
   dotenv.load()
 }
 
-import './config/ioc/loader';
 // Inicializar configuracion desde ambiente
 
 const config = new ConfigService()
@@ -31,7 +33,11 @@ container.bind<any>(TYPES.IConfig).toConstantValue(config)
 const httpPort = config.getVars().server.port
 const httpRootPath = config.getVars().server.rootPath
 
+// conFiguracion de la base de datos
 
+mongoose.connect('mongodb://localhost:27017/resolveStudio', { useNewUrlParser: true })
+  // tslint:disable-next-line: no-console
+  .then(db => console.log('Db conected')).catch(err => {console.log(err)})
 
 // Configurar wrap de Express con Inversify para proveer inversión de control e inyección de dependencias
 const server = new InversifyExpressServer(container, null, {
@@ -54,7 +60,7 @@ const server = new InversifyExpressServer(container, null, {
 
   const httpServer = app.listen(httpPort, () => {
     // tslint:disable-next-line: no-console
-    console.log('Api started at ', httpPort)
+    console.log('Api started at localhost on port', httpPort)
     // agrego un tiempo de 10 segundos de warm up para enviar señal de readyness y recibir tráfico
     setTimeout(() => {
       lightship.signalReady()
