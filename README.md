@@ -1,5 +1,5 @@
 # ResolveProject
-This is a project to publissh information in a DashBoard
+This is a project to publish information in a DashBoard
 1. npm i
 2. Create a .env file copy the example on this repository env.dev.sample
 3. Run the command npm run dev to start the project
