@@ -62,7 +62,7 @@
     "soap": "^0.26.0",
     "swagger-ui-express": "^4.0.2",
     "uuid": "^3.3.2",
-    "xml-crypto": "^1.4.0"
+    "xml-crypto": "^2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.2.1",
